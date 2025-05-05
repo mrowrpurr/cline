@@ -133,13 +133,18 @@ export const ChatRowContent = ({
 	const { mcpServers, mcpMarketplaceCatalog } = useExtensionState()
 	const [seeNewChangesDisabled, setSeeNewChangesDisabled] = useState(false)
 
-	const [cost, apiReqCancelReason, apiReqStreamingFailedMessage] = useMemo(() => {
+	const [cost, model, apiReqCancelReason, apiReqStreamingFailedMessage] = useMemo(() => {
 		if (message.text != null && message.say === "api_req_started") {
 			const info: ClineApiReqInfo = JSON.parse(message.text)
-			return [info.cost, info.cancelReason, info.streamingFailedMessage]
+			return [info.cost, info.model, info.cancelReason, info.streamingFailedMessage]
 		}
-		return [undefined, undefined, undefined]
+		return [undefined, undefined, undefined, undefined]
 	}, [message.text, message.say])
+
+	const displayModel = useMemo(() => {
+		if (!model) return null
+		return model.startsWith("openrouter/") ? model.replace("openrouter/", "") : model
+	}, [model])
 
 	// when resuming task last won't be api_req_failed but a resume_task message so api_req_started will show loading spinner. that's why we just remove the last api_req_started that failed without streaming anything
 	const apiRequestFailedMessage =
@@ -732,12 +737,19 @@ export const ChatRowContent = ({
 									{icon}
 									{title}
 									{/* Need to render this every time since it affects height of row by 2px */}
-									<VSCodeBadge
-										style={{
-											opacity: cost != null && cost > 0 ? 1 : 0,
-										}}>
-										${Number(cost || 0)?.toFixed(4)}
-									</VSCodeBadge>
+									<div style={{ display: "flex", gap: "4px" }}>
+										<VSCodeBadge
+											style={{
+												opacity: cost != null && cost > 0 ? 1 : 0,
+											}}>
+											${Number(cost || 0)?.toFixed(4)}
+										</VSCodeBadge>
+										{displayModel && (
+											<VSCodeBadge>
+												{displayModel}
+											</VSCodeBadge>
+										)}
+									</div>
 								</div>
 								<span className={`codicon codicon-chevron-${isExpanded ? "up" : "down"}`}></span>
 							</div>

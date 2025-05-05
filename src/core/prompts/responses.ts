@@ -1,5 +1,7 @@
 import { Anthropic } from "@anthropic-ai/sdk"
 import * as diff from "diff"
+import * as fs from "fs"
+import * as os from "os"
 import * as path from "path"
 import { ClineIgnoreController, LOCK_TEXT_SYMBOL } from "../ignore/ClineIgnoreController"
 
@@ -156,7 +158,20 @@ Otherwise, if you have not completed the task and do not need additional informa
 	},
 
 	planModeInstructions: () => {
-		return `In this mode you should focus on information gathering, asking questions, and architecting a solution. Once you have a plan, use the plan_mode_respond tool to engage in a conversational back and forth with the user. Do not use the plan_mode_respond tool until you've gathered all the information you need e.g. with read_file or ask_followup_question.
+		const overridePath = path.join(os.homedir(), ".cline", "plan-mode-instructions.js")
+
+		if (fs.existsSync(overridePath)) {
+			try {
+				const customFn = require(overridePath)
+				if (typeof customFn === "function") {
+					return customFn()
+				}
+			} catch (err) {
+				console.error("Failed to load custom system prompt:", err)
+			}
+		}
+
+		return `In this mode you should focus on information gathering, asking questions, and architecting a solution. You may use tools to read files, inspect project structure, or explore version control history. Avoid tools that modify implementation code or execute commands unless the file is clearly for planning purposes (e.g. PROJECT_IDEAS.md). Once you have a plan, use the plan_mode_respond tool to engage in a conversational back and forth with the user. Do not use the plan_mode_respond tool until you've gathered all the information you need e.g. with read_file or ask_followup_question.
 (Remember: If it seems the user wants you to use tools only available in Act Mode, you should ask the user to "toggle to Act mode" (use those words) - they will have to manually do this themselves with the Plan/Act toggle button below. You do not have the ability to switch to Act Mode yourself, and must wait for the user to do it themselves once they are satisfied with the plan. You also cannot present an option to toggle to Act mode, as this will be something you need to direct the user to do manually themselves.)`
 	},
 

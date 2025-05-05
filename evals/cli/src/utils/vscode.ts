@@ -1,9 +1,9 @@
 import execa from "execa"
-import * as path from "path"
 import * as fs from "fs"
 import fetch from "node-fetch"
 import * as os from "os"
-import { installRequiredExtensions, configureExtensionSettings } from "./extensions"
+import * as path from "path"
+import { configureExtensionSettings, installRequiredExtensions } from "./extensions"
 
 // Store temporary directories for cleanup
 interface VSCodeResources {
@@ -270,7 +270,7 @@ export async function spawnVSCode(workspacePath: string, vsixPath?: string): Pro
 				let disposable = vscode.commands.registerCommand('cline-activator.activate', async function () {
 					try {
 						// Make sure the Cline extension is activated
-						const extension = vscode.extensions.getExtension('saoudrizwan.claude-dev');
+						const extension = vscode.extensions.getExtension('mrowrpurr.mrowr-cline');
 						if (!extension) {
 							console.error('Cline extension not found');
 							return;

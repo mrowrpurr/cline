@@ -1,15 +1,15 @@
 // type that represents json data that is sent from extension to webview, called ExtensionMessage and has 'type' enum which can be 'plusButtonClicked' or 'settingsButtonClicked' or 'hello'
 
+import type { BalanceResponse, PaymentTransaction, UsageTransaction } from "../shared/ClineAccount"
 import { GitCommit } from "../utils/git"
 import { ApiConfiguration, ModelInfo } from "./api"
 import { AutoApprovalSettings } from "./AutoApprovalSettings"
 import { BrowserSettings } from "./BrowserSettings"
 import { ChatSettings } from "./ChatSettings"
-import { HistoryItem } from "./HistoryItem"
-import { McpServer, McpMarketplaceCatalog, McpDownloadResponse, McpViewTab } from "./mcp"
-import { TelemetrySetting } from "./TelemetrySetting"
-import type { BalanceResponse, UsageTransaction, PaymentTransaction } from "../shared/ClineAccount"
 import { ClineRulesToggles } from "./cline-rules"
+import { HistoryItem } from "./HistoryItem"
+import { McpDownloadResponse, McpMarketplaceCatalog, McpServer, McpViewTab } from "./mcp"
+import { TelemetrySetting } from "./TelemetrySetting"
 
 // webview will hold state
 export interface ExtensionMessage {
@@ -271,6 +271,7 @@ export interface ClineApiReqInfo {
 	cacheWrites?: number
 	cacheReads?: number
 	cost?: number
+	model?: string
 	cancelReason?: ClineApiReqCancelReason
 	streamingFailedMessage?: string
 }
