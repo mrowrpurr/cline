@@ -1,17 +1,17 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import { setTimeout as setTimeoutPromise } from "node:timers/promises"
-import * as vscode from "vscode"
-import pWaitFor from "p-wait-for"
-import { Logger } from "./services/logging/Logger"
-import { createClineAPI } from "./exports"
-import "./utils/path" // necessary to have access to String.prototype.toPosix
-import { DIFF_VIEW_URI_SCHEME } from "./integrations/editor/DiffViewProvider"
 import assert from "node:assert"
-import { telemetryService } from "./services/telemetry/TelemetryService"
+import { setTimeout as setTimeoutPromise } from "node:timers/promises"
+import pWaitFor from "p-wait-for"
+import * as vscode from "vscode"
 import { WebviewProvider } from "./core/webview"
+import { createClineAPI } from "./exports"
+import { DIFF_VIEW_URI_SCHEME } from "./integrations/editor/DiffViewProvider"
 import { ErrorService } from "./services/error/ErrorService"
-import { initializeTestMode, cleanupTestMode } from "./services/test/TestMode"
+import { Logger } from "./services/logging/Logger"
+import { telemetryService } from "./services/telemetry/TelemetryService"
+import { cleanupTestMode, initializeTestMode } from "./services/test/TestMode"
+import "./utils/path" // necessary to have access to String.prototype.toPosix
 
 /*
 Built using https://github.com/microsoft/vscode-webview-ui-toolkit
@@ -409,7 +409,7 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand("cline.focusChatInput", () => {
 			let visibleWebview = WebviewProvider.getVisibleInstance()
 			if (!visibleWebview) {
-				vscode.commands.executeCommand("claude-dev.SidebarProvider.focus")
+				vscode.commands.executeCommand("mrowr-cline.SidebarProvider.focus")
 				visibleWebview = WebviewProvider.getSidebarInstance()
 				// showing the extension will call didBecomeVisible which focuses it already
 				// but it doesn't focus if a tab is selected which focusChatInput accounts for

@@ -1,23 +1,23 @@
-import * as http from "http"
-import * as vscode from "vscode"
-import * as path from "path"
-import { execa } from "execa"
-import { Logger } from "@services/logging/Logger"
+import { getSavedApiConversationHistory, getSavedClineMessages } from "@core/storage/disk"
+import { getAllExtensionState, storeSecret, updateApiConfiguration, updateGlobalState } from "@core/storage/state"
 import { WebviewProvider } from "@core/webview"
-import { AutoApprovalSettings } from "@shared/AutoApprovalSettings"
-import {
-	getWorkspacePath,
-	validateWorkspacePath,
-	initializeGitRepository,
-	getFileChanges,
-	calculateToolSuccessRate,
-} from "./GitHelper"
-import { updateGlobalState, getAllExtensionState, updateApiConfiguration, storeSecret } from "@core/storage/state"
-import { ClineAsk, ExtensionMessage } from "@shared/ExtensionMessage"
+import { Logger } from "@services/logging/Logger"
 import { ApiProvider } from "@shared/api"
-import { WebviewMessage } from "@shared/WebviewMessage"
+import { AutoApprovalSettings } from "@shared/AutoApprovalSettings"
+import { ClineAsk, ExtensionMessage } from "@shared/ExtensionMessage"
 import { HistoryItem } from "@shared/HistoryItem"
-import { getSavedClineMessages, getSavedApiConversationHistory } from "@core/storage/disk"
+import { WebviewMessage } from "@shared/WebviewMessage"
+import { execa } from "execa"
+import * as http from "http"
+import * as path from "path"
+import * as vscode from "vscode"
+import {
+	calculateToolSuccessRate,
+	getFileChanges,
+	getWorkspacePath,
+	initializeGitRepository,
+	validateWorkspacePath,
+} from "./GitHelper"
 
 /**
  * Creates a tracker to monitor tool calls and failures during task execution
@@ -134,7 +134,7 @@ export function createTestServer(webviewProvider?: WebviewProvider): http.Server
 	vscode.commands.executeCommand("workbench.view.claude-dev-ActivityBar")
 
 	// Then ensure the webview is focused/loaded
-	vscode.commands.executeCommand("claude-dev.SidebarProvider.focus")
+	vscode.commands.executeCommand("mrowr-cline.SidebarProvider.focus")
 
 	// Update auto approval settings if webviewProvider is available
 	if (webviewProvider?.controller?.context) {

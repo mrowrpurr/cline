@@ -57,7 +57,7 @@
 			"claude-dev-ActivityBar": [
 				{
 					"type": "webview",
-					"id": "claude-dev.SidebarProvider",
+					"id": "mrowr-cline.SidebarProvider",
 					"name": ""
 				}
 			]
