@@ -8,7 +8,7 @@
 <table>
 <tbody>
 <td align="center">
-<a href="https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev" target="_blank"><strong>Im VS Marketplace herunterladen</strong></a>
+<a href="https://marketplace.visualstudio.com/items?itemName=mrowrpurr.mrowr-cline" target="_blank"><strong>Im VS Marketplace herunterladen</strong></a>
 </td>
 <td align="center">
 <a href="https://discord.gg/cline" target="_blank"><strong>Discord</strong></a>
@@ -159,4 +159,3 @@ Um zum Projekt beizutragen, beginnen Sie mit unserem [Beitragsleitfaden](CONTRIB
 ## Lizenz
 
 [Apache 2.0 © 2025 Cline Bot Inc.](./LICENSE)
-

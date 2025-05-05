@@ -569,7 +569,7 @@ export class Controller {
 				const settingsFilter = message.text || ""
 				await vscode.commands.executeCommand(
 					"workbench.action.openSettings",
-					`@ext:saoudrizwan.claude-dev ${settingsFilter}`.trim(), // trim whitespace if no settings filter
+					`@ext:mrowrpurr.mrowr-cline ${settingsFilter}`.trim(), // trim whitespace if no settings filter
 				)
 				break
 			}

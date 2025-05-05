@@ -131,7 +131,7 @@ async function updateAutoApprovalSettings(context: vscode.ExtensionContext, prov
 export function createTestServer(webviewProvider?: WebviewProvider): http.Server {
 	// Try to show the Cline sidebar
 	Logger.log("[createTestServer] Opening Cline in sidebar...")
-	vscode.commands.executeCommand("workbench.view.claude-dev-ActivityBar")
+	vscode.commands.executeCommand("workbench.view.mrowr-cline-ActivityBar")
 
 	// Then ensure the webview is focused/loaded
 	vscode.commands.executeCommand("mrowr-cline.SidebarProvider.focus")
