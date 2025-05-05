@@ -1,5 +1,5 @@
 ---
-"mrowr-cline": minor
+"claude-dev": minor
 ---
 
 add open ai cache to ui
