@@ -1,5 +1,5 @@
 {
-	"name": "mrowr-claude-dev",
+	"name": "mrowr-cline",
 	"displayName": "Mrowr's Cline",
 	"description": "Mrowr's Autonomous coding agent right in your IDE, capable of creating/editing files, running commands, using the browser, and more with your permission every step of the way.",
 	"version": "3.14.0",
